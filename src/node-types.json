@@ -39,6 +39,29 @@
     }
   },
   {
+    "type": "address_control_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "control_command",
+          "named": true
+        },
+        {
+          "type": "global_label",
+          "named": true
+        },
+        {
+          "type": "num_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assignment",
     "named": true,
     "fields": {},
@@ -105,6 +128,33 @@
     }
   },
   {
+    "type": "byte_control_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "comma",
+          "named": true
+        },
+        {
+          "type": "control_command",
+          "named": true
+        },
+        {
+          "type": "num_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "export_control_command",
     "named": true,
     "fields": {},
@@ -137,41 +187,6 @@
         },
         {
           "type": "file_name",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "imm_control_command",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "binary_expr",
-          "named": true
-        },
-        {
-          "type": "control_command",
-          "named": true
-        },
-        {
-          "type": "global_label",
-          "named": true
-        },
-        {
-          "type": "local_label",
-          "named": true
-        },
-        {
-          "type": "num_literal",
-          "named": true
-        },
-        {
-          "type": "unary_expr",
           "named": true
         }
       ]
@@ -291,6 +306,25 @@
     "fields": {}
   },
   {
+    "type": "proc_control_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "control_command",
+          "named": true
+        },
+        {
+          "type": "global_label",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "relative",
     "named": true,
     "fields": {},
@@ -345,6 +379,25 @@
     }
   },
   {
+    "type": "segment_control_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "control_command",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -357,7 +410,15 @@
           "named": true
         },
         {
+          "type": "address_control_command",
+          "named": true
+        },
+        {
           "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "byte_control_command",
           "named": true
         },
         {
@@ -366,10 +427,6 @@
         },
         {
           "type": "file_control_command",
-          "named": true
-        },
-        {
-          "type": "imm_control_command",
           "named": true
         },
         {
@@ -389,11 +446,38 @@
           "named": true
         },
         {
+          "type": "proc_control_command",
+          "named": true
+        },
+        {
           "type": "relative",
           "named": true
         },
         {
           "type": "section_control_command",
+          "named": true
+        },
+        {
+          "type": "segment_control_command",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "string_content",
           "named": true
         }
       ]
@@ -435,6 +519,10 @@
     }
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
     "type": "#",
     "named": false
   },
@@ -459,11 +547,23 @@
     "named": false
   },
   {
+    "type": "char_literal",
+    "named": true
+  },
+  {
+    "type": "comma",
+    "named": true
+  },
+  {
     "type": "comment",
     "named": true
   },
   {
     "type": "control_command",
+    "named": true
+  },
+  {
+    "type": "escape_sequence",
     "named": true
   },
   {
@@ -492,6 +592,10 @@
   },
   {
     "type": "section_name",
+    "named": true
+  },
+  {
+    "type": "string_content",
     "named": true
   }
 ]

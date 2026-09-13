@@ -32,8 +32,11 @@ module.exports = grammar({
 			choice(
 				$.file_control_command,
 				$.section_control_command,
-				$.imm_control_command,
+				$.byte_control_command,
 				$.export_control_command,
+				$.segment_control_command,
+				$.address_control_command,
+				$.proc_control_command,
 			),
 
 		/* ex: include */
@@ -48,6 +51,8 @@ module.exports = grammar({
 		export_control_command: ($) =>
 			seq(choice($._export_name), $._ws_sep, $.global_label),
 
+		segment_control_command: ($) => seq(choice($._segment_name), $.string),
+
 		section_control_command: ($) =>
 			seq(
 				choice($._sec_name),
@@ -55,26 +60,35 @@ module.exports = grammar({
 				alias(/[._a-zA-Z][._a-zA-Z0-9]+/, $.section_name),
 			),
 
-		// control_command w/ expr
-		imm_control_command: ($) =>
-			seq(choice($._word_name, $._byte_name), $._expr),
+		byte_control_command: ($) =>
+			seq(choice($._word_name, $._byte_name), $._byte_list),
 
-		_inc_name: ($) =>
-			alias(token(seq(optional("."), "include")), $.control_command),
-		_export_name: ($) =>
-			alias(token(seq(optional("."), "export")), $.control_command),
-		_sec_name: ($) =>
-			alias(token(seq(optional("."), "section")), $.control_command),
-		_word_name: ($) =>
-			alias(token(seq(optional("."), "word")), $.control_command),
-		_byte_name: ($) =>
-			alias(token(seq(optional("."), "byte")), $.control_command),
+		address_control_command: ($) =>
+			seq(choice($._address_name), choice($.num_literal, $.global_label)),
+
+		proc_control_command: ($) =>
+			choice(seq($._proc_name, $.global_label), $._endproc_name),
+
+		_inc_name: ($) => alias(token(".include"), $.control_command),
+		_export_name: ($) => alias(token(".export"), $.control_command),
+		_segment_name: ($) => alias(token(".segment"), $.control_command),
+		_sec_name: ($) => alias(token(".section"), $.control_command),
+		_word_name: ($) => alias(token("word"), $.control_command),
+		_byte_name: ($) => alias(token(".byte"), $.control_command),
+		_address_name: ($) => alias(token(".addr"), $.control_command),
+		_proc_name: ($) => alias(token(".proc"), $.control_command),
+		_endproc_name: ($) => alias(token(".endproc"), $.control_command),
 
 		assignment: ($) => seq($.global_label, "=", $._expr),
 
 		/* labels */
 
 		label: ($) => seq(choice($.local_label, $.global_label), ":"),
+
+		_byte_list: ($) =>
+			repeat1(choice(seq($._byte_literal, $.comma), $._byte_literal)),
+
+		_byte_literal: ($) => choice($.num_literal, $.char_literal),
 
 		/* expression definitions */
 
@@ -98,6 +112,8 @@ module.exports = grammar({
 				),
 			),
 
+		char_literal: ($) => token(seq("'", token.immediate(/[^\\\n\r]{1}/), "'")),
+
 		binary_expr: ($) =>
 			prec.left(
 				seq(
@@ -106,6 +122,7 @@ module.exports = grammar({
 					$._expr,
 				),
 			),
+
 		unary_expr: ($) =>
 			prec(
 				2,
@@ -279,6 +296,26 @@ module.exports = grammar({
 				/[sS][tT][aA]/,
 			),
 
+		string: ($) =>
+			seq('"', repeat(choice($.string_content, $.escape_sequence)), '"'),
+
+		// Content inside the string (anything except a backslash or double quote)
+		string_content: ($) => token(/[^\\"\r\n]+/),
+
+		// Rules for valid escape sequences (e.g., \n, \t, \")
+		escape_sequence: ($) =>
+			token(
+				seq(
+					"\\",
+					choice(
+						/[^xu]/, // Standard characters like \n, \t, \\, \"
+						/x[0-9a-fA-F]{2}/, // Hex escapes (e.g., \x41)
+						/u[0-9a-fA-F]{4}/, // Unicode escapes (e.g., \u0041)
+					),
+				),
+			),
+
+		comma: ($) => /,/,
 		local_label: ($) => /\.[a-zA-Z0-9_]+/,
 		global_label: ($) => /[a-zA-Z_][a-zA-Z0-9_]+/,
 	},

@@ -4,13 +4,21 @@ control_commands
 
 .include h.itxts
 
-include cregs.s
-include "importantfile.s"
+.segment "HEADER"
+  .byte 'N', 'E', 'S', $1A
 
-section text
+.addr Main
+.addr 0
+
+.include cregs.s
+.include "importantfile.s"
+
+.section text
 .section .text.entry
 
-.byte 5+5
+.proc Main 
+
+.endproc
 
 
 
@@ -20,6 +28,25 @@ section text
   (file_control_command
     (control_command)
     (file_name))
+  (segment_control_command
+    (control_command)
+    (string
+      (string_content)))
+  (byte_control_command
+          (control_command)
+          (char_literal)
+          (comma)
+          (char_literal)
+          (comma)
+          (char_literal)
+          (comma)
+          (num_literal))
+  (address_control_command
+    (control_command)
+    (global_label))
+  (address_control_command
+    (control_command)
+    (num_literal))
   (file_control_command
     (control_command)
     (file_name))
@@ -32,9 +59,8 @@ section text
   (section_control_command
     (control_command)
     (section_name))
-  (imm_control_command
+  (proc_control_command
     (control_command)
-    (binary_expr
-      (num_literal)
-      (operator)
-      (num_literal))))
+    (global_label))
+  (proc_control_command
+    (control_command)))    
