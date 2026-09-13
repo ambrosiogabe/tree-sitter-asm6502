@@ -31,9 +31,9 @@ module.exports = grammar({
 		_directive: ($) =>
 			choice(
 				$.file_directive,
-				$.label_directive,
 				$.section_directive,
 				$.imm_directive,
+				$.export_directive,
 			),
 
 		/* ex: include */
@@ -45,33 +45,22 @@ module.exports = grammar({
 				//$._ws_end,
 			),
 
-		/* ex: extern */
-		label_directive: ($) =>
-			seq(
-				choice($._ext_name),
-				$._ws_sep,
-				$.global_label,
-				//$._ws_end,
-			),
+		export_directive: ($) =>
+			seq(choice($._export_name), $._ws_sep, $.global_label),
 
 		section_directive: ($) =>
 			seq(
 				choice($._sec_name),
 				$._ws_sep,
 				alias(/[._a-zA-Z][._a-zA-Z0-9]+/, $.section_name),
-				//$._ws_end,
 			),
 
 		// directive w/ expr
-		imm_directive: ($) =>
-			seq(
-				choice($._word_name, $._byte_name),
-				$._expr,
-				//$._ws_end,
-			),
+		imm_directive: ($) => seq(choice($._word_name, $._byte_name), $._expr),
 
 		_inc_name: ($) => alias(token(seq(optional("."), "include")), $.directive),
-		_ext_name: ($) => alias(token(seq(optional("."), "extern")), $.directive),
+		_export_name: ($) =>
+			alias(token(seq(optional("."), "export")), $.directive),
 		_sec_name: ($) => alias(token(seq(optional("."), "section")), $.directive),
 		_word_name: ($) => alias(token(seq(optional("."), "word")), $.directive),
 		_byte_name: ($) => alias(token(seq(optional("."), "byte")), $.directive),

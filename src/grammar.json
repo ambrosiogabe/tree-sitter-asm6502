@@ -89,15 +89,15 @@
         },
         {
           "type": "SYMBOL",
-          "name": "label_directive"
-        },
-        {
-          "type": "SYMBOL",
           "name": "section_directive"
         },
         {
           "type": "SYMBOL",
           "name": "imm_directive"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "export_directive"
         }
       ]
     },
@@ -137,7 +137,7 @@
         }
       ]
     },
-    "label_directive": {
+    "export_directive": {
       "type": "SEQ",
       "members": [
         {
@@ -145,7 +145,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ext_name"
+              "name": "_export_name"
             }
           ]
         },
@@ -237,7 +237,7 @@
       "named": true,
       "value": "directive"
     },
-    "_ext_name": {
+    "_export_name": {
       "type": "ALIAS",
       "content": {
         "type": "TOKEN",
@@ -258,7 +258,7 @@
             },
             {
               "type": "STRING",
-              "value": "extern"
+              "value": "export"
             }
           ]
         }

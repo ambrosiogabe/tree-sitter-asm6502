@@ -105,6 +105,25 @@
     }
   },
   {
+    "type": "export_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "global_label",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "file_directive",
     "named": true,
     "fields": {},
@@ -267,25 +286,6 @@
     }
   },
   {
-    "type": "label_directive",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "global_label",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "opcode",
     "named": true,
     "fields": {}
@@ -361,6 +361,10 @@
           "named": true
         },
         {
+          "type": "export_directive",
+          "named": true
+        },
+        {
           "type": "file_directive",
           "named": true
         },
@@ -382,10 +386,6 @@
         },
         {
           "type": "label",
-          "named": true
-        },
-        {
-          "type": "label_directive",
           "named": true
         },
         {

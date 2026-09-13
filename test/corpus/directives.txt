@@ -7,12 +7,10 @@ Directives
 include cregs.s
 include "importantfile.s"
 
-.extern __label
-
 section text
 .section .text.entry
 
-.byte 5+5+_label
+.byte 5+5
 
 
 
@@ -28,9 +26,6 @@ section text
   (file_directive
     (directive)
     (file_name))
-  (label_directive
-    (directive)
-    (global_label))
   (section_directive
     (directive)
     (section_name))
@@ -40,9 +35,6 @@ section text
   (imm_directive
     (directive)
     (binary_expr
-      (binary_expr
-        (num_literal)
-        (operator)
-        (num_literal))
+      (num_literal)
       (operator)
-      (global_label))))
+      (num_literal))))
