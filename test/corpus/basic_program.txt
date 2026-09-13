@@ -1,0 +1,169 @@
+================================================================================
+basic_program
+================================================================================
+
+.export Main
+
+.segment "HEADER"
+    .byte 'N', 'E', 'S', $1A  ; Magic string identifying an iNES file
+    .byte $02                 ; Number of 16KB PRG-ROM banks (32KB total)
+    .byte $01                 ; Number of 8KB CHR-ROM banks (8KB total)
+    .byte %00000001           ; Mirroring, battery-backed RAM, mapper lower nibble
+    .byte %00000000           ; Mapper upper nibble
+    .byte $00, $00, $00, $00, $00, $00, $00, $00 ; Padding bytes
+
+.segment "VECTORS"
+  .addr 0 ; Set nmi location to 0
+  .addr Main ; Set the reset location to our Main function
+  .addr 0 ; Set irq/brk location to 0
+
+.segment "CODE"
+
+.proc Main
+    ; Initialize some ZeroPage memory
+    ldx #$B2
+    stx $00
+    ldx #$F5
+    stx $01
+
+    ; Add $00 and $01
+    ; We load memory location 0 into the accumulator because the adc operation will
+    ; store the result of the addition back into the accumulator register
+    lda $00
+    ; Clear carry command
+    clc
+    ; Add with carry. This adds the memory at $01 to the current data in the accumulator "a" register
+    adc $01
+
+    ; Store the first byte of the result to $02
+    sta $02
+
+    ; Add the carry bit to zero and store it into $03
+    lda #0
+    adc #0
+    sta $03
+
+    rts
+.endproc
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (export_control_command
+        (control_command)
+        (global_label))
+    (segment_control_command
+        (control_command)
+        (string
+            (string_content)))
+    (byte_control_command
+        (control_command)
+        (char_literal)
+        (comma)
+        (char_literal)
+        (comma)
+        (char_literal)
+        (comma)
+        (num_literal))
+        (comment)
+    (byte_control_command
+        (control_command)
+        (num_literal))
+    (comment)
+    (byte_control_command
+        (control_command)
+        (num_literal))
+    (comment)
+    (byte_control_command
+        (control_command)
+        (num_literal))
+    (comment)
+    (byte_control_command
+        (control_command)
+        (num_literal))
+    (comment)
+    (byte_control_command
+        (control_command)
+        (num_literal)
+        (comma)
+        (num_literal)
+        (comma)
+        (num_literal)
+        (comma)
+        (num_literal)
+        (comma)
+        (num_literal)
+        (comma)
+        (num_literal)
+        (comma)
+        (num_literal)
+        (comma)
+        (num_literal))
+    (comment)
+    (segment_control_command
+        (control_command)
+        (string
+            (string_content)))
+    (address_control_command
+        (control_command)
+        (num_literal))
+    (comment)
+    (address_control_command
+        (control_command)
+        (global_label))
+    (comment)
+    (address_control_command
+        (control_command)
+        (num_literal))
+    (comment)
+    (segment_control_command
+        (control_command)
+        (string
+            (string_content)))
+    (proc_control_command
+        (control_command)
+        (global_label))
+    (comment)
+    (immediate
+        (opcode)
+        (num_literal))
+    (absolute
+        (opcode)
+        (num_literal))
+    (immediate
+        (opcode)
+        (num_literal))
+    (absolute
+        (opcode)
+        (num_literal))
+    (comment)
+    (comment)
+    (comment)
+    (absolute
+        (opcode)
+        (num_literal))
+    (comment)
+    (implied
+        (opcode))
+    (comment)
+    (absolute
+        (opcode)
+        (num_literal))
+    (comment)
+    (absolute
+        (opcode)
+        (num_literal))
+    (comment)
+    (immediate
+        (opcode)
+        (num_literal))
+    (immediate
+        (opcode)
+        (num_literal))
+    (absolute
+        (opcode)
+        (num_literal))
+    (implied
+        (opcode))
+    (proc_control_command
+        (control_command)))
