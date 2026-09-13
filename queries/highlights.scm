@@ -7,7 +7,7 @@
 (local_label) @variable
 (global_label) @variable
 
-(directive) @operator
+(control_command) @operator
 (file_name) @string
 (section_name) @constant
 

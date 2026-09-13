@@ -1,5 +1,5 @@
 ================================================================================
-Directives
+control_commands
 ================================================================================
 
 .include h.itxts
@@ -17,23 +17,23 @@ section text
 --------------------------------------------------------------------------------
 
 (source_file
-  (file_directive
-    (directive)
+  (file_control_command
+    (control_command)
     (file_name))
-  (file_directive
-    (directive)
+  (file_control_command
+    (control_command)
     (file_name))
-  (file_directive
-    (directive)
+  (file_control_command
+    (control_command)
     (file_name))
-  (section_directive
-    (directive)
+  (section_control_command
+    (control_command)
     (section_name))
-  (section_directive
-    (directive)
+  (section_control_command
+    (control_command)
     (section_name))
-  (imm_directive
-    (directive)
+  (imm_control_command
+    (control_command)
     (binary_expr
       (num_literal)
       (operator)

@@ -105,7 +105,7 @@
     }
   },
   {
-    "type": "export_directive",
+    "type": "export_control_command",
     "named": true,
     "fields": {},
     "children": {
@@ -113,7 +113,7 @@
       "required": true,
       "types": [
         {
-          "type": "directive",
+          "type": "control_command",
           "named": true
         },
         {
@@ -124,7 +124,7 @@
     }
   },
   {
-    "type": "file_directive",
+    "type": "file_control_command",
     "named": true,
     "fields": {},
     "children": {
@@ -132,7 +132,7 @@
       "required": true,
       "types": [
         {
-          "type": "directive",
+          "type": "control_command",
           "named": true
         },
         {
@@ -143,7 +143,7 @@
     }
   },
   {
-    "type": "imm_directive",
+    "type": "imm_control_command",
     "named": true,
     "fields": {},
     "children": {
@@ -155,7 +155,7 @@
           "named": true
         },
         {
-          "type": "directive",
+          "type": "control_command",
           "named": true
         },
         {
@@ -326,7 +326,7 @@
     }
   },
   {
-    "type": "section_directive",
+    "type": "section_control_command",
     "named": true,
     "fields": {},
     "children": {
@@ -334,7 +334,7 @@
       "required": true,
       "types": [
         {
-          "type": "directive",
+          "type": "control_command",
           "named": true
         },
         {
@@ -361,15 +361,15 @@
           "named": true
         },
         {
-          "type": "export_directive",
+          "type": "export_control_command",
           "named": true
         },
         {
-          "type": "file_directive",
+          "type": "file_control_command",
           "named": true
         },
         {
-          "type": "imm_directive",
+          "type": "imm_control_command",
           "named": true
         },
         {
@@ -393,7 +393,7 @@
           "named": true
         },
         {
-          "type": "section_directive",
+          "type": "section_control_command",
           "named": true
         }
       ]
@@ -463,7 +463,7 @@
     "named": true
   },
   {
-    "type": "directive",
+    "type": "control_command",
     "named": true
   },
   {

@@ -25,7 +25,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_directive"
+          "name": "_control_command"
         }
       ]
     },
@@ -80,28 +80,28 @@
         ]
       }
     },
-    "_directive": {
+    "_control_command": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "file_directive"
+          "name": "file_control_command"
         },
         {
           "type": "SYMBOL",
-          "name": "section_directive"
+          "name": "section_control_command"
         },
         {
           "type": "SYMBOL",
-          "name": "imm_directive"
+          "name": "imm_control_command"
         },
         {
           "type": "SYMBOL",
-          "name": "export_directive"
+          "name": "export_control_command"
         }
       ]
     },
-    "file_directive": {
+    "file_control_command": {
       "type": "SEQ",
       "members": [
         {
@@ -137,7 +137,7 @@
         }
       ]
     },
-    "export_directive": {
+    "export_control_command": {
       "type": "SEQ",
       "members": [
         {
@@ -159,7 +159,7 @@
         }
       ]
     },
-    "section_directive": {
+    "section_control_command": {
       "type": "SEQ",
       "members": [
         {
@@ -186,7 +186,7 @@
         }
       ]
     },
-    "imm_directive": {
+    "imm_control_command": {
       "type": "SEQ",
       "members": [
         {
@@ -235,7 +235,7 @@
         }
       },
       "named": true,
-      "value": "directive"
+      "value": "control_command"
     },
     "_export_name": {
       "type": "ALIAS",
@@ -264,7 +264,7 @@
         }
       },
       "named": true,
-      "value": "directive"
+      "value": "control_command"
     },
     "_sec_name": {
       "type": "ALIAS",
@@ -293,7 +293,7 @@
         }
       },
       "named": true,
-      "value": "directive"
+      "value": "control_command"
     },
     "_word_name": {
       "type": "ALIAS",
@@ -322,7 +322,7 @@
         }
       },
       "named": true,
-      "value": "directive"
+      "value": "control_command"
     },
     "_byte_name": {
       "type": "ALIAS",
@@ -351,7 +351,7 @@
         }
       },
       "named": true,
-      "value": "directive"
+      "value": "control_command"
     },
     "assignment": {
       "type": "SEQ",

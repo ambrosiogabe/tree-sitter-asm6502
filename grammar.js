@@ -20,7 +20,7 @@ module.exports = grammar({
 		source_file: ($) => repeat($._statement),
 
 		_statement: ($) =>
-			choice($._operation, $.label, $.assignment, $._directive),
+			choice($._operation, $.label, $.assignment, $._control_command),
 
 		/* grammar misc */
 		comment: ($) => /;.*/,
@@ -28,16 +28,16 @@ module.exports = grammar({
 		_ws_sep: ($) => token.immediate(repeat1(WS)),
 		_ws_end: ($) => token.immediate(seq(repeat(WS), NEWLINE)),
 
-		_directive: ($) =>
+		_control_command: ($) =>
 			choice(
-				$.file_directive,
-				$.section_directive,
-				$.imm_directive,
-				$.export_directive,
+				$.file_control_command,
+				$.section_control_command,
+				$.imm_control_command,
+				$.export_control_command,
 			),
 
 		/* ex: include */
-		file_directive: ($) =>
+		file_control_command: ($) =>
 			seq(
 				choice($._inc_name),
 				$._ws_sep,
@@ -45,25 +45,30 @@ module.exports = grammar({
 				//$._ws_end,
 			),
 
-		export_directive: ($) =>
+		export_control_command: ($) =>
 			seq(choice($._export_name), $._ws_sep, $.global_label),
 
-		section_directive: ($) =>
+		section_control_command: ($) =>
 			seq(
 				choice($._sec_name),
 				$._ws_sep,
 				alias(/[._a-zA-Z][._a-zA-Z0-9]+/, $.section_name),
 			),
 
-		// directive w/ expr
-		imm_directive: ($) => seq(choice($._word_name, $._byte_name), $._expr),
+		// control_command w/ expr
+		imm_control_command: ($) =>
+			seq(choice($._word_name, $._byte_name), $._expr),
 
-		_inc_name: ($) => alias(token(seq(optional("."), "include")), $.directive),
+		_inc_name: ($) =>
+			alias(token(seq(optional("."), "include")), $.control_command),
 		_export_name: ($) =>
-			alias(token(seq(optional("."), "export")), $.directive),
-		_sec_name: ($) => alias(token(seq(optional("."), "section")), $.directive),
-		_word_name: ($) => alias(token(seq(optional("."), "word")), $.directive),
-		_byte_name: ($) => alias(token(seq(optional("."), "byte")), $.directive),
+			alias(token(seq(optional("."), "export")), $.control_command),
+		_sec_name: ($) =>
+			alias(token(seq(optional("."), "section")), $.control_command),
+		_word_name: ($) =>
+			alias(token(seq(optional("."), "word")), $.control_command),
+		_byte_name: ($) =>
+			alias(token(seq(optional("."), "byte")), $.control_command),
 
 		assignment: ($) => seq($.global_label, "=", $._expr),
 

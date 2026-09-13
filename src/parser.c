@@ -27,9 +27,9 @@
 enum {
   sym_comment = 1,
   sym__ws_sep = 2,
-  aux_sym_file_directive_token1 = 3,
-  aux_sym_file_directive_token2 = 4,
-  aux_sym_section_directive_token1 = 5,
+  aux_sym_file_control_command_token1 = 3,
+  aux_sym_file_control_command_token2 = 4,
+  aux_sym_section_control_command_token1 = 5,
   aux_sym__inc_name_token1 = 6,
   aux_sym__export_name_token1 = 7,
   aux_sym__sec_name_token1 = 8,
@@ -124,11 +124,11 @@ enum {
   sym_global_label = 97,
   sym_source_file = 98,
   sym__statement = 99,
-  sym__directive = 100,
-  sym_file_directive = 101,
-  sym_export_directive = 102,
-  sym_section_directive = 103,
-  sym_imm_directive = 104,
+  sym__control_command = 100,
+  sym_file_control_command = 101,
+  sym_export_control_command = 102,
+  sym_section_control_command = 103,
+  sym_imm_control_command = 104,
   sym__inc_name = 105,
   sym__export_name = 106,
   sym__sec_name = 107,
@@ -160,14 +160,14 @@ static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [sym_comment] = "comment",
   [sym__ws_sep] = "_ws_sep",
-  [aux_sym_file_directive_token1] = "file_name",
-  [aux_sym_file_directive_token2] = "file_name",
-  [aux_sym_section_directive_token1] = "section_name",
-  [aux_sym__inc_name_token1] = "directive",
-  [aux_sym__export_name_token1] = "directive",
-  [aux_sym__sec_name_token1] = "directive",
-  [aux_sym__word_name_token1] = "directive",
-  [aux_sym__byte_name_token1] = "directive",
+  [aux_sym_file_control_command_token1] = "file_name",
+  [aux_sym_file_control_command_token2] = "file_name",
+  [aux_sym_section_control_command_token1] = "section_name",
+  [aux_sym__inc_name_token1] = "control_command",
+  [aux_sym__export_name_token1] = "control_command",
+  [aux_sym__sec_name_token1] = "control_command",
+  [aux_sym__word_name_token1] = "control_command",
+  [aux_sym__byte_name_token1] = "control_command",
   [anon_sym_EQ] = "=",
   [anon_sym_COLON] = ":",
   [anon_sym_LPAREN] = "(",
@@ -257,11 +257,11 @@ static const char * const ts_symbol_names[] = {
   [sym_global_label] = "global_label",
   [sym_source_file] = "source_file",
   [sym__statement] = "_statement",
-  [sym__directive] = "_directive",
-  [sym_file_directive] = "file_directive",
-  [sym_export_directive] = "export_directive",
-  [sym_section_directive] = "section_directive",
-  [sym_imm_directive] = "imm_directive",
+  [sym__control_command] = "_control_command",
+  [sym_file_control_command] = "file_control_command",
+  [sym_export_control_command] = "export_control_command",
+  [sym_section_control_command] = "section_control_command",
+  [sym_imm_control_command] = "imm_control_command",
   [sym__inc_name] = "_inc_name",
   [sym__export_name] = "_export_name",
   [sym__sec_name] = "_sec_name",
@@ -293,9 +293,9 @@ static const TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
   [sym_comment] = sym_comment,
   [sym__ws_sep] = sym__ws_sep,
-  [aux_sym_file_directive_token1] = aux_sym_file_directive_token1,
-  [aux_sym_file_directive_token2] = aux_sym_file_directive_token1,
-  [aux_sym_section_directive_token1] = aux_sym_section_directive_token1,
+  [aux_sym_file_control_command_token1] = aux_sym_file_control_command_token1,
+  [aux_sym_file_control_command_token2] = aux_sym_file_control_command_token1,
+  [aux_sym_section_control_command_token1] = aux_sym_section_control_command_token1,
   [aux_sym__inc_name_token1] = aux_sym__inc_name_token1,
   [aux_sym__export_name_token1] = aux_sym__inc_name_token1,
   [aux_sym__sec_name_token1] = aux_sym__inc_name_token1,
@@ -390,11 +390,11 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_global_label] = sym_global_label,
   [sym_source_file] = sym_source_file,
   [sym__statement] = sym__statement,
-  [sym__directive] = sym__directive,
-  [sym_file_directive] = sym_file_directive,
-  [sym_export_directive] = sym_export_directive,
-  [sym_section_directive] = sym_section_directive,
-  [sym_imm_directive] = sym_imm_directive,
+  [sym__control_command] = sym__control_command,
+  [sym_file_control_command] = sym_file_control_command,
+  [sym_export_control_command] = sym_export_control_command,
+  [sym_section_control_command] = sym_section_control_command,
+  [sym_imm_control_command] = sym_imm_control_command,
   [sym__inc_name] = sym__inc_name,
   [sym__export_name] = sym__export_name,
   [sym__sec_name] = sym__sec_name,
@@ -435,15 +435,15 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [aux_sym_file_directive_token1] = {
+  [aux_sym_file_control_command_token1] = {
     .visible = true,
     .named = true,
   },
-  [aux_sym_file_directive_token2] = {
+  [aux_sym_file_control_command_token2] = {
     .visible = true,
     .named = true,
   },
-  [aux_sym_section_directive_token1] = {
+  [aux_sym_section_control_command_token1] = {
     .visible = true,
     .named = true,
   },
@@ -823,23 +823,23 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [sym__directive] = {
+  [sym__control_command] = {
     .visible = false,
     .named = true,
   },
-  [sym_file_directive] = {
+  [sym_file_control_command] = {
     .visible = true,
     .named = true,
   },
-  [sym_export_directive] = {
+  [sym_export_control_command] = {
     .visible = true,
     .named = true,
   },
-  [sym_section_directive] = {
+  [sym_section_control_command] = {
     .visible = true,
     .named = true,
   },
-  [sym_imm_directive] = {
+  [sym_imm_control_command] = {
     .visible = true,
     .named = true,
   },
@@ -2071,7 +2071,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == ' ') ADVANCE(113);
       END_STATE();
     case 114:
-      ACCEPT_TOKEN(aux_sym_file_directive_token1);
+      ACCEPT_TOKEN(aux_sym_file_control_command_token1);
       if (lookahead == '.' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
@@ -2079,10 +2079,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(114);
       END_STATE();
     case 115:
-      ACCEPT_TOKEN(aux_sym_file_directive_token2);
+      ACCEPT_TOKEN(aux_sym_file_control_command_token2);
       END_STATE();
     case 116:
-      ACCEPT_TOKEN(aux_sym_section_directive_token1);
+      ACCEPT_TOKEN(aux_sym_section_control_command_token1);
       if (lookahead == '.' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
@@ -3718,7 +3718,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [0] = {
     [ts_builtin_sym_end] = ACTIONS(1),
     [sym_comment] = ACTIONS(3),
-    [aux_sym_file_directive_token2] = ACTIONS(1),
+    [aux_sym_file_control_command_token2] = ACTIONS(1),
     [aux_sym__inc_name_token1] = ACTIONS(1),
     [aux_sym__export_name_token1] = ACTIONS(1),
     [aux_sym__sec_name_token1] = ACTIONS(1),
@@ -3812,11 +3812,11 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [1] = {
     [sym_source_file] = STATE(48),
     [sym__statement] = STATE(3),
-    [sym__directive] = STATE(3),
-    [sym_file_directive] = STATE(3),
-    [sym_export_directive] = STATE(3),
-    [sym_section_directive] = STATE(3),
-    [sym_imm_directive] = STATE(3),
+    [sym__control_command] = STATE(3),
+    [sym_file_control_command] = STATE(3),
+    [sym_export_control_command] = STATE(3),
+    [sym_section_control_command] = STATE(3),
+    [sym_imm_control_command] = STATE(3),
     [sym__inc_name] = STATE(47),
     [sym__export_name] = STATE(38),
     [sym__sec_name] = STATE(44),
@@ -3914,11 +3914,11 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   },
   [2] = {
     [sym__statement] = STATE(2),
-    [sym__directive] = STATE(2),
-    [sym_file_directive] = STATE(2),
-    [sym_export_directive] = STATE(2),
-    [sym_section_directive] = STATE(2),
-    [sym_imm_directive] = STATE(2),
+    [sym__control_command] = STATE(2),
+    [sym_file_control_command] = STATE(2),
+    [sym_export_control_command] = STATE(2),
+    [sym_section_control_command] = STATE(2),
+    [sym_imm_control_command] = STATE(2),
     [sym__inc_name] = STATE(47),
     [sym__export_name] = STATE(38),
     [sym__sec_name] = STATE(44),
@@ -4016,11 +4016,11 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   },
   [3] = {
     [sym__statement] = STATE(2),
-    [sym__directive] = STATE(2),
-    [sym_file_directive] = STATE(2),
-    [sym_export_directive] = STATE(2),
-    [sym_section_directive] = STATE(2),
-    [sym_imm_directive] = STATE(2),
+    [sym__control_command] = STATE(2),
+    [sym_file_control_command] = STATE(2),
+    [sym_export_control_command] = STATE(2),
+    [sym_section_control_command] = STATE(2),
+    [sym_imm_control_command] = STATE(2),
     [sym__inc_name] = STATE(47),
     [sym__export_name] = STATE(38),
     [sym__sec_name] = STATE(44),
@@ -5923,8 +5923,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(194), 2,
-      aux_sym_file_directive_token1,
-      aux_sym_file_directive_token2,
+      aux_sym_file_control_command_token1,
+      aux_sym_file_control_command_token2,
   [247] = 3,
     ACTIONS(3), 1,
       sym_comment,
@@ -5976,7 +5976,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(216), 1,
-      aux_sym_section_directive_token1,
+      aux_sym_section_control_command_token1,
   [320] = 2,
     ACTIONS(120), 1,
       sym_comment,
@@ -6122,8 +6122,8 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [94] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym__expr, 3),
   [96] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 3),
   [98] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 3),
-  [100] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_imm_directive, 2),
-  [102] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_imm_directive, 2),
+  [100] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_imm_control_command, 2),
+  [102] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_imm_control_command, 2),
   [104] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_immediate, 4),
   [106] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_immediate, 4),
   [108] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_relative, 3),
@@ -6141,12 +6141,12 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [132] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym__reg_y, 2),
   [134] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_implied, 1),
   [136] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_implied, 1),
-  [138] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_section_directive, 3),
-  [140] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_section_directive, 3),
-  [142] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_export_directive, 3),
-  [144] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_export_directive, 3),
-  [146] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_file_directive, 3),
-  [148] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_file_directive, 3),
+  [138] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_section_control_command, 3),
+  [140] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_section_control_command, 3),
+  [142] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_export_control_command, 3),
+  [144] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_export_control_command, 3),
+  [146] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_file_control_command, 3),
+  [148] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_file_control_command, 3),
   [150] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_absolute, 4, .dynamic_precedence = 1),
   [152] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_absolute, 4, .dynamic_precedence = 1),
   [154] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_label, 2),

@@ -7,6 +7,6 @@ Export
 --------------------------------------------------------------------------------
 
 (source_file
-    (export_directive
-    (directive)
+    (export_control_command
+    (control_command)
     (global_label)))
