@@ -3,6 +3,7 @@ control_commands
 ================================================================================
 
 .include h.itxts
+.import Foo
 
 .segment "HEADER"
   .byte 'N', 'E', 'S', $1A
@@ -28,6 +29,9 @@ control_commands
   (file_control_command
     (control_command)
     (file_name))
+  (import_control_command
+    (control_command)
+    (global_label))    
   (segment_control_command
     (control_command)
     (string

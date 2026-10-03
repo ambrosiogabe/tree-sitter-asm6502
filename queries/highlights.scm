@@ -1,9 +1,10 @@
 
 (opcode) @function.builtin
-(num_literal) @number
+(num_literal) @constant.numeric
 (register) @constant.builtin
 (operator) @operator
 
+(cheap_local_label) @variable
 (local_label) @variable
 (global_label) @variable
 

@@ -6,6 +6,8 @@ Labels
 label:
   lda #0
 
+@loop:
+
 .label2:
   sta (label+5,x)
 label: lda #0
@@ -18,6 +20,8 @@ label: lda #0
   (immediate
     (opcode)
     (num_literal))
+  (label
+    (cheap_local_label))
   (label
     (local_label))
   (indirect

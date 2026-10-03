@@ -101,6 +101,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "import_control_command"
+        },
+        {
+          "type": "SYMBOL",
           "name": "segment_control_command"
         },
         {
@@ -158,6 +162,28 @@
             {
               "type": "SYMBOL",
               "name": "_export_name"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ws_sep"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "global_label"
+        }
+      ]
+    },
+    "import_control_command": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_import_name"
             }
           ]
         },
@@ -311,6 +337,18 @@
       "named": true,
       "value": "control_command"
     },
+    "_import_name": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "STRING",
+          "value": ".import"
+        }
+      },
+      "named": true,
+      "value": "control_command"
+    },
     "_segment_name": {
       "type": "ALIAS",
       "content": {
@@ -425,6 +463,10 @@
             {
               "type": "SYMBOL",
               "name": "global_label"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "cheap_local_label"
             }
           ]
         },
@@ -1396,6 +1438,10 @@
     "comma": {
       "type": "PATTERN",
       "value": ","
+    },
+    "cheap_local_label": {
+      "type": "PATTERN",
+      "value": "@[a-zA-Z0-9_]+"
     },
     "local_label": {
       "type": "PATTERN",

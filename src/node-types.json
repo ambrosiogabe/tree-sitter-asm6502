@@ -243,6 +243,25 @@
     }
   },
   {
+    "type": "import_control_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "control_command",
+          "named": true
+        },
+        {
+          "type": "global_label",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "indirect",
     "named": true,
     "fields": {},
@@ -289,6 +308,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "cheap_local_label",
+          "named": true
+        },
         {
           "type": "global_label",
           "named": true
@@ -438,6 +461,10 @@
           "named": true
         },
         {
+          "type": "import_control_command",
+          "named": true
+        },
+        {
           "type": "indirect",
           "named": true
         },
@@ -548,6 +575,10 @@
   },
   {
     "type": "char_literal",
+    "named": true
+  },
+  {
+    "type": "cheap_local_label",
     "named": true
   },
   {

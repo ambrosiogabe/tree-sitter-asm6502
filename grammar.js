@@ -34,6 +34,7 @@ module.exports = grammar({
 				$.section_control_command,
 				$.byte_control_command,
 				$.export_control_command,
+				$.import_control_command,
 				$.segment_control_command,
 				$.address_control_command,
 				$.proc_control_command,
@@ -50,6 +51,9 @@ module.exports = grammar({
 
 		export_control_command: ($) =>
 			seq(choice($._export_name), $._ws_sep, $.global_label),
+
+		import_control_command: ($) =>
+			seq(choice($._import_name), $._ws_sep, $.global_label),
 
 		segment_control_command: ($) => seq(choice($._segment_name), $.string),
 
@@ -71,6 +75,7 @@ module.exports = grammar({
 
 		_inc_name: ($) => alias(token(".include"), $.control_command),
 		_export_name: ($) => alias(token(".export"), $.control_command),
+		_import_name: ($) => alias(token(".import"), $.control_command),
 		_segment_name: ($) => alias(token(".segment"), $.control_command),
 		_sec_name: ($) => alias(token(".section"), $.control_command),
 		_word_name: ($) => alias(token("word"), $.control_command),
@@ -83,7 +88,8 @@ module.exports = grammar({
 
 		/* labels */
 
-		label: ($) => seq(choice($.local_label, $.global_label), ":"),
+		label: ($) =>
+			seq(choice($.local_label, $.global_label, $.cheap_local_label), ":"),
 
 		_byte_list: ($) =>
 			repeat1(choice(seq($._byte_literal, $.comma), $._byte_literal)),
@@ -316,6 +322,7 @@ module.exports = grammar({
 			),
 
 		comma: ($) => /,/,
+		cheap_local_label: ($) => /@[a-zA-Z0-9_]+/,
 		local_label: ($) => /\.[a-zA-Z0-9_]+/,
 		global_label: ($) => /[a-zA-Z_][a-zA-Z0-9_]+/,
 	},
