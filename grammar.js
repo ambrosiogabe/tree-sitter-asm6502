@@ -107,7 +107,8 @@ module.exports = grammar({
 				$.unary_expr,
 			),
 
-		_identifier: ($) => choice($.local_label, $.global_label),
+		_identifier: ($) =>
+			choice($.local_label, $.global_label, $.cheap_local_label),
 
 		num_literal: ($) =>
 			token(

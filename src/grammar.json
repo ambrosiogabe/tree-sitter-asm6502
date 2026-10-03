@@ -562,6 +562,10 @@
         {
           "type": "SYMBOL",
           "name": "global_label"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "cheap_local_label"
         }
       ]
     },
