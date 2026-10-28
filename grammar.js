@@ -31,6 +31,7 @@ module.exports = grammar({
 		_control_command: ($) =>
 			choice(
 				$.file_control_command,
+				$.incbin_control_command,
 				$.section_control_command,
 				$.byte_control_command,
 				$.export_control_command,
@@ -46,7 +47,13 @@ module.exports = grammar({
 				choice($._inc_name),
 				$._ws_sep,
 				alias(choice(/[._a-zA-Z0-9]+/, /"[._a-zA-Z0-9]+"/), $.file_name),
-				//$._ws_end,
+			),
+
+		incbin_control_command: ($) =>
+			seq(
+				choice($._inc_bin_name),
+				$._ws_sep,
+				alias(choice($.string), $.file_name),
 			),
 
 		export_control_command: ($) =>
@@ -74,6 +81,7 @@ module.exports = grammar({
 			choice(seq($._proc_name, $.global_label), $._endproc_name),
 
 		_inc_name: ($) => alias(token(".include"), $.control_command),
+		_inc_bin_name: ($) => alias(token(".incbin"), $.control_command),
 		_export_name: ($) => alias(token(".export"), $.control_command),
 		_import_name: ($) => alias(token(".import"), $.control_command),
 		_segment_name: ($) => alias(token(".segment"), $.control_command),

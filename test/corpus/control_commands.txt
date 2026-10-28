@@ -5,6 +5,8 @@ control_commands
 .include h.itxts
 .import Foo
 
+.incbin "foo.chr"
+
 .segment "HEADER"
   .byte 'N', 'E', 'S', $1A
 
@@ -32,6 +34,10 @@ control_commands
   (import_control_command
     (control_command)
     (global_label))    
+  (incbin_control_command
+    (control_command)
+      (file_name
+        (string_content)))    
   (segment_control_command
     (control_command)
     (string

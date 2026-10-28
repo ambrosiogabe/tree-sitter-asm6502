@@ -89,6 +89,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "incbin_control_command"
+        },
+        {
+          "type": "SYMBOL",
           "name": "section_control_command"
         },
         {
@@ -145,6 +149,38 @@
               {
                 "type": "PATTERN",
                 "value": "\"[._a-zA-Z0-9]+\""
+              }
+            ]
+          },
+          "named": true,
+          "value": "file_name"
+        }
+      ]
+    },
+    "incbin_control_command": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_inc_bin_name"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ws_sep"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "string"
               }
             ]
           },
@@ -320,6 +356,18 @@
         "content": {
           "type": "STRING",
           "value": ".include"
+        }
+      },
+      "named": true,
+      "value": "control_command"
+    },
+    "_inc_bin_name": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "STRING",
+          "value": ".incbin"
         }
       },
       "named": true,
