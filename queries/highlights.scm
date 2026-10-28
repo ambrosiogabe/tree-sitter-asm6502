@@ -3,6 +3,7 @@
 (num_literal) @constant.numeric
 (register) @constant.builtin
 (operator) @operator
+(string) @string
 
 (cheap_local_label) @variable
 (local_label) @variable
